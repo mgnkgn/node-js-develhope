@@ -1,0 +1,35 @@
+/*
+node;
+const crypto = require("crypto");
+Object.getOwnPropertyNames(crypto)[
+  ("DEFAULT_ENCODING",
+  "constants",
+  "DiffieHellman",
+  "ECDH",
+  "fips",
+  "generateKeyPair",
+  "generateKeyPairSync",
+  "getCiphers",
+  "getCurves",
+  "getDiffieHellman",
+  "getHashes",
+  "pbkdf2",
+  "pbkdf2Sync",
+  "privateDecrypt",
+  "privateEncrypt",
+  "publicDecrypt",
+  "publicEncrypt",
+  "randomBytes",
+  "randomFill",
+  "randomFillSync",
+  "randomInt",
+  "randomInts",
+  "scrypt",
+  "scryptSync",
+  "setEngine",
+  "timingSafeEqual")
+];
+
+crypto.randomBytes(16).toString("hex");
+("23b4c4df77f0b8e7cad5cf5ddf9c0d6b");
+*/
