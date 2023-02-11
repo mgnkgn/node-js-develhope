@@ -34,7 +34,7 @@ app.get("/planets", (req: Request, res: Response) => {
 app.get("/planets/:id", (req: Request, res: Response) => {
   const receivedId = req.params.id;
   const desiredPlanet = planets.find((planet) => planet.id === +receivedId);
-  res.status(201).json(desiredPlanet);
+  res.status(200).json(desiredPlanet);
 });
 
 app.post("/planets", (req: Request, res: Response) => {
@@ -53,7 +53,7 @@ app.delete("/planets/:id", (req: Request, res: Response) => {
   );
   planets = planetsAfterDeletion;
   console.log(planets);
-  res.json({ msg: "Planet deleted successfully." });
+  res.status(200).json({ msg: "Planet deleted successfully." });
 });
 
 app.put("/planets/:id", (req: Request, res: Response) => {
@@ -63,7 +63,7 @@ app.put("/planets/:id", (req: Request, res: Response) => {
     planet.id === +receivedId ? { ...planet, name: newPlanetName } : planet
   );
   console.log(planets);
-  res.json({ msg: "Planet updated successfully." });
+  res.status(200).json({ msg: "Planet updated successfully." });
 });
 
 app.listen(port, () => {
