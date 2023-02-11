@@ -1,7 +1,8 @@
-import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import * as dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
+import Joi from "joi";
 import { Request, Response } from "express";
 const app: express.Application = express();
 
@@ -26,7 +27,10 @@ let planets: Planets = [
     name: "Mars",
   },
 ];
-
+const planetSchema = Joi.object({
+  id: Joi.number().integer().required(),
+  name: Joi.string().required(),
+});
 app.get("/planets", (req: Request, res: Response) => {
   res.status(200).json(planets);
 });
@@ -41,6 +45,12 @@ app.post("/planets", (req: Request, res: Response) => {
   const { id, name } = req.body;
 
   const newPlanet = { id, name };
+  const validatedNewPlanet = planetSchema.validate(newPlanet);
+  if (validatedNewPlanet.error) {
+    return res
+      .status(400)
+      .json({ msg: validatedNewPlanet.error.details[0].message });
+  }
   planets = [...planets, newPlanet];
   console.log(planets);
   res.status(201).json({ msg: "Planet added succesfully." });
