@@ -12,6 +12,10 @@ import {
   deleteById,
   createImage,
 } from "./controllers/planet";
+import { logIn, signUp, logOut } from "./controllers/users";
+import authorize from "./authorize";
+
+import "./passport.ts";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -43,6 +47,13 @@ app.delete("/planets/:id", deleteById);
 app.put("/planets/:id", updateById);
 
 app.post("/planets/:id/image", upload.single("image"), createImage);
+
+app.post("/planets/users/login", logIn);
+
+app.post("/planets/users/signup", signUp);
+
+app.get("/planets/users/logout", authorize, logOut);
+
 app.listen(port, () => {
   console.log(`Server Running on http://localhost:${port}`);
 });
